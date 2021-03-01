@@ -11,21 +11,69 @@ public class Problem {
      * destinations which demand the commodities
      */
     Destination[] destinations;
+    private int supply[];
+    private int demand[];
 
     /**
      * the cost matrix of transport
      */
     int costsMatrix[][];
 
+    public Problem(){}
+
     /**
-     * constructor with 3 parameters
+     * constructor with 5 parameters
      * @param sources  which supply the commodities
      * @param destinations which demand the commodities
      * @param costsMatrix the cost matrix of transport
+     * @param supply
+     * @param demand
      */
-    public Problem(Source[] sources, Destination[] destinations, int[][] costsMatrix) {
+    public Problem(Source[] sources, int[] supply, Destination[] destinations, int[] demand, int[][] costsMatrix) {
         this.sources = sources;
         this.destinations = destinations;
+        this.costsMatrix = costsMatrix;
+        this.supply=supply;
+        this.demand=demand;
+    }
+
+    public Source[] getSources() {
+        return sources;
+    }
+
+    public void setSources(Source[] sources) {
+        this.sources = sources;
+    }
+
+    public Destination[] getDestinations() {
+        return destinations;
+    }
+
+    public void setDestinations(Destination[] destinations) {
+        this.destinations = destinations;
+    }
+
+    public int[] getSupply() {
+        return supply;
+    }
+
+    public void setSupply(int[] supply) {
+        this.supply = supply;
+    }
+
+    public int[] getDemand() {
+        return demand;
+    }
+
+    public void setDemand(int[] demand) {
+        this.demand = demand;
+    }
+
+    public int[][] getCostsMatrix() {
+        return costsMatrix;
+    }
+
+    public void setCostsMatrix(int[][] costsMatrix) {
         this.costsMatrix = costsMatrix;
     }
 
@@ -41,55 +89,27 @@ public class Problem {
             matrix+=Arrays.toString(costsMatrix[i])+ '\n';
         }
         return "Problem{" + '\n' +
-                "sources=" + Arrays.toString(sources) + '\n' +
-                ", destinations=" + Arrays.toString(destinations) + '\n'+
-                ", costsMatrix=" + '\n' + matrix +'\n'+
+                "sources=" + Arrays.toString(sources) +
+                "\nsupply="+Arrays.toString(supply)+
+                ", \ndestinations=" + Arrays.toString(destinations) +
+                "\ndemand="+Arrays.toString(demand)+
+                ",\ncostsMatrix=" + '\n' + matrix +'\n'+
                 '}';
     }
 
-    public static void main(String[] args) {
-
-        /**
-         *  instantiated 3 objects from Source class
-         */
-        Source s1 = new Source("S1", SourceType.FACTORY,10);
-        Source s2 = new Source("S2", SourceType.WAREHOUSE,35);
-        Source s3 = new Source("S3", SourceType.WAREHOUSE,25);
-
-        System.out.println(s1);
-        /**
-         * populated an array of sources
-         */
-        Source[] sources = new Source[3];
-        sources[0] = s1;
-        sources[1] = s2;
-        sources[2] = s3;
-
-        /**
-         *  instantiated 3 objects from Destination class
-         */
-        Destination d1=new Destination("D1",20);
-        Destination d2=new Destination("D2",25);
-        Destination d3=new Destination("D3",25);
-
-        /**
-         * populated an array of destinations
-         */
-        Destination[] destinations=new Destination[3];
-        destinations[0]=d1;
-        destinations[1]=d2;
-        destinations[2]=d3;
-
-        /**
-         * declare and instantiate a matrix of costs
-         */
-        int[][] costsMatrix={{2,3,1},{5,4,8},{5,6,8}};
-
-        /**
-         * create an instance of Problem class(given in the lab2)
-         */
-        Problem transportationProblem=new Problem(sources,destinations,costsMatrix);
-        System.out.println(transportationProblem);
-
+    public boolean isBalanced(){
+        if(demand.length!=supply.length)
+            return  false;
+        int supplies=0;
+        for(int s:supply){
+            supplies+=s;
+        }
+        for(int d:demand)
+        {
+            supplies-=d;
+        }
+        if(supplies!=0)
+            return false;
+        return true;
     }
 }
