@@ -39,40 +39,41 @@ public class Lab2 {
         Destination d1=new Destination("D1");
         Destination d2=new Destination("D2");
         Destination d3=new Destination("D3");
+        //Destination d4=new Destination("D4");
 
         /**
          * populated an array of destinations
          */
-        Destination[] destinations=new Destination[3];
+        Destination[] destinations=new Destination[4];
        addDestination(d1,destinations,0);
        addDestination(d1,destinations,1); //cannot add duplicates
 
        addDestination(d2,destinations,1);
        addDestination(d3,destinations,2);
+      // addDestination(d4,destinations,3);
 
 
         /**
          * declare and instantiate a matrix of costs
          */
-        int[][] costsMatrix={{2,3,1},{5,4,8},{5,6,8}};
-
-        int[] supply={10,35,25};
-        int[] demand={20,25,25};
+        //int[][] costsMatrix={{2,3,1},{5,4,8},{5,6,8}};
+        int[][] costsMatrix={{3,1,7,4},{2,6,5,9},{8,3,3,2}};
+        int[] supply={300,400,500};
+        int[] demand={250,350,400,200};
 
         /**
          * create an instance of Problem class(given in the lab2)
          */
         Problem transportationProblem=new Problem(sources,supply, destinations, demand, costsMatrix);
         System.out.println(transportationProblem);
-
+        System.out.println(transportationProblem.isBalanced());
         //Algorithm greedy = new GreedyAlgorithm(transportationProblem);
         GreedyAlgorithm greedy = new GreedyAlgorithm(transportationProblem);
         Solution sol = greedy.solve();
         System.out.println(sol);
 
-        System.out.println(transportationProblem.isBalanced());
-       System.out.println(greedy.min(transportationProblem.getSupply()));
-       System.out.println(greedy.secondMin(transportationProblem.getSupply()));
+
+
 
     }
 }

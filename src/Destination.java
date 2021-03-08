@@ -17,8 +17,10 @@ public class Destination {
         this.name = name;
     }
 
-
-
+    /**
+     * override toString() method from Object class
+     * @return the identity of the object in a formatted string value, including name value
+     */
     @Override
     public String toString() {
         return "Destination{" +
@@ -26,6 +28,10 @@ public class Destination {
                 '}';
     }
 
+    /**
+     * override equals() method from Object class
+     * @return true if the objects are equals by their names
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,4 +1,5 @@
 abstract public class Source {
+    //name of the source
     protected String name;
     // private SourceType type;
     /*
@@ -7,32 +8,40 @@ abstract public class Source {
         this.name = name;
         // this.type = type;
     }*/
-    public Source(){}
+
+    /**
+     * constructor withoutparameter
+     */
+    public Source() {
+    }
+
     /**
      * constructor with 1 parameter
      *
-     * @param name
+     * @param name - the name of the source
      */
     public Source(String name) {
         this.name = name;
     }
 
+    /**
+     * get the name value of the instance
+     */
     public String getName() {
         return name;
     }
 
-    //   public SourceType getType() {
-    //       return type;
-    //    }
-
+    /**
+     * set the name value of the instance
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    //  public void setType(SourceType type) {
-    //     this.type = type;
-    //   }
-
+    /**
+     * override toString() method from Object class
+     * @return the identity of the object in a formatted string value, including name value
+     */
     @Override
     public String toString() {
         return "Source{" +
